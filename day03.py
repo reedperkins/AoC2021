@@ -2,16 +2,18 @@ import fileinput
 
 nums = list(tuple(x.strip()) for x in fileinput.input())
 numLength = len(nums[0])
-half = len(nums) / 2
 
 def ones(lst, i):
     return sum(n[i] == '1' for n in lst)
 
 # Part 1
-gamma = 0
+gamma = epsilon = ''
+half = len(nums) / 2
 for i in range(numLength):
-    gamma |= (ones(nums, i) > half) << numLength-1-i
-epsilon = ~gamma & (2**numLength - 1)
+    gamma += '1' if int(ones(nums, i) > half) == 1 else '0'
+    epsilon += '1' if int(ones(nums, i) > half) == 0 else '0'
+gamma = int(gamma, 2)
+epsilon = int(epsilon, 2)
 print(gamma * epsilon)
 
 # Part 2
