@@ -3,14 +3,14 @@ from functools import reduce
 
 lines = list(map(int, fileinput.input()))
 
-def countIncrease(total, i):
-    return total + 1 if lines[i] > lines[i-1] else total
-
-def countWindowIncrease(total, i):
-    return total + 1 if sum(lines[i:i+3]) > sum(lines[i-1:i+2]) else total
-
 # Part 1
-print(reduce(countIncrease, range(1, len(lines)), 0))
+print(sum(lines[i] > lines[i-1] for i in range(1, len(lines))))
 
 # Part 2
-print(reduce(countWindowIncrease, range(1, len(lines)), 0))
+print(sum(lines[i] > lines[i-3] for i in range(3, len(lines))))
+
+# Since the windows share two elements, we really only need to compare
+# the last element of the second window with the first element of the
+# first window.
+# 0 1 2 
+#   1 2 3
