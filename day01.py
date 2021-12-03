@@ -1,5 +1,4 @@
 import fileinput
-from functools import reduce
 
 lines = list(map(int, fileinput.input()))
 
